@@ -1,16 +1,14 @@
 import express, { Application, Request, Response } from "express";
 import axios from "axios";
+import dotenv from "dotenv";
+import morgan from "morgan";
+dotenv.config();
 
 const app: Application = express();
-
-// #      secret_key = ""
-// #
-// #      #  text_input = input("Input your prompt: ")
-// #
-// #      url = f""
+app.use(morgan("dev"));
 
 app.get("/", async (_req: Request, res: Response) => {
-  const SECRET_KEY = "AIzaSyBphxkFoBpjggmhFJKvBHb4h9xSrD_5Lug";
+  const SECRET_KEY = process.env.GEMINI_API_KEY;
   const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${SECRET_KEY}`;
   const response = await axios.post(
     url,
