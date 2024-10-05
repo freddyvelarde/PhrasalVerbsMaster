@@ -1,0 +1,7 @@
+- [x] Search best free English Rest Apis.
+  - https://api.dictionaryapi.dev/api/v2/entries/en/<word>
+  - gemini ai
+- [ ] Registration system (Sign In, Log Out).
+- [ ] Get all most common used phrasal verbs (with meaning, examples)
+- [ ] Quiz section about a phrasal verb
+- [ ] Code an "Spaced Repetition" for phrasal verbs previous learned.
