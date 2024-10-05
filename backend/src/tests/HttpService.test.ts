@@ -8,7 +8,7 @@ const mock = new MockAdapter(axios);
 
 describe("HttpService", () => {
   const baseUrl = "https://jsonplaceholder.typicode.com";
-  const httpService = new HttpService(baseUrl);
+  let httpService = new HttpService(baseUrl);
 
   afterEach(() => {
     // Reset the mock adapter after each test
@@ -38,7 +38,23 @@ describe("HttpService", () => {
     }
   });
 
+  it("should successfully post data and return the response", async () => {
+    const mockData = { status: "ok", method: "POST" };
+    const baseUrl = "https://dummyjson.com";
+    httpService = new HttpService(baseUrl);
+    mock.onPost(`${baseUrl}/test`).reply(200, mockData);
+
+    const result = await httpService.post<any>(
+      "/test",
+      { key: "value" },
+      { "Content-type": "application/json" },
+    );
+
+    expect(result).toEqual(mockData);
+  });
+
   // it("should handle unexpected errors", async () => {
+  //
   //   // Simulate a network error for the /users endpoint
   //   mock.onGet(`${baseUrl}/users`).networkError();
   //
