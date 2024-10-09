@@ -5,10 +5,10 @@
   - [x] HttpService
 - [ ] Registration system.
 
-  - [ ] Sign In:
-    - [ ] valid filds
-    - [ ] hash password
-    - [ ] valid email
+  - [x] `Sign In`: POST /api/users:
+    - [x] valid filds
+    - [x] hash password
+    - [ ] email validation
 
 - [ ] Get all most common used phrasal verbs (with meaning, examples)
 - [ ] Quiz section about a phrasal verb
