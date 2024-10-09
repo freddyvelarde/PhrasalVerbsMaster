@@ -20,10 +20,21 @@ class App {
   }
 
   private configureServer() {
+    const clientEnvUrl = process.env.CLIENT_ENV_URL || "http://localhost:5173"; // vite/react url
+    const clientProdUrl = process.env.CLIENT_PROD_URL || "";
     dotenv.config();
     this.app.use(morgan("dev"));
     this.app.use(express.json());
-    this.app.use(cors());
+    this.app.use(
+      cors({
+        origin: [clientEnvUrl, clientProdUrl],
+        methods: ["POST", "GET"],
+        allowedHeaders: ["Content-Type", "Authorization"],
+        exposedHeaders: ["X-RateLimit-Remaining"],
+        credentials: true,
+        maxAge: 3600,
+      }),
+    );
   }
 
   private setupRoutes() {
