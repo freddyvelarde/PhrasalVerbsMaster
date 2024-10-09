@@ -1,0 +1,57 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+
+model User {
+  id Int @id @default(autoincrement())
+  name String
+  lastname String
+  username String @unique
+  email String
+  password String
+  avatar String? // not required
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+
+  phrasal_verb User_Phrasal_Verb[]
+}
+
+model Phrasal_Verb {
+  id Int @id @default(autoincrement())
+  word String
+  meaning String
+  pronunciation String?
+  created_at DateTime @default(now())
+  updated_at DateTime @default(now())
+
+  users User_Phrasal_Verb[]
+}
+
+model User_Phrasal_Verb {
+  id Int @id @default(autoincrement())
+  user_id Int
+  phrasal_verb_id Int
+  created_at DateTime @default(now())
+
+  // relations
+
+  user User @relation(fields: [user_id], references: [id])
+
+  phrasal_verb Phrasal_Verb @relation(fields: [phrasal_verb_id], references: [id])
+
+  @@unique([user_id, phrasal_verb_id])
+
+}
+
