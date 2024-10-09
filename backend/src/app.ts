@@ -1,6 +1,8 @@
-import express, { Application, Request, Response } from "express";
+import express, { Application } from "express";
 import dotenv from "dotenv";
 import morgan from "morgan";
+import userRoutes from "./features/users/User.routes";
+import cors from "cors";
 
 class App {
   private readonly app: Application;
@@ -21,12 +23,11 @@ class App {
     dotenv.config();
     this.app.use(morgan("dev"));
     this.app.use(express.json());
+    this.app.use(cors());
   }
 
   private setupRoutes() {
-    this.app.get("/", (_req: Request, res: Response) => {
-      res.send("hello world");
-    });
+    this.app.use("/api/users", userRoutes);
   }
 
   public start() {
