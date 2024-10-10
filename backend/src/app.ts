@@ -1,7 +1,7 @@
 import express, { Application } from "express";
 import dotenv from "dotenv";
 import morgan from "morgan";
-import userRoutes from "./features/users/User.routes";
+import { userRoutes } from "./features/users";
 import cors from "cors";
 
 class App {
